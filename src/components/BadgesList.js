@@ -26,15 +26,39 @@ class BadgesListItem extends React.Component {
   }
 }
 
-class BadgesList extends React.Component {
-  render() {
+function BadgesList (props) {
+  const badges = props.badges;
+  const [query, setQuery] = React.useState('');
+  const filteredBadges = badges.filter(badge =>{
+    return `${badge.firstName} ${badge.lastName}`.toLowerCase().includes(query.toLowerCase());
+  });
+    if (filteredBadges.length === 0){
+      return(
+        <div>
+          <div className="form-group">
+          <label>Search Filter</label>
+          <input type="text" className="form-control" value={query} onChange={(e)=> setQuery(e.target.value)}>
+          </input>
+        </div>
+          <h3>No badges were found</h3>
+          <Link className="btn btn-primary" to="/badges/new">
+            Create New Badge
+          </Link>
+        </div>
+      );
+    }
     return (
       <div className="BadgesList">
+        <div className="form-group">
+          <label>Search Filter</label>
+          <input type="text" className="form-control" value={query} onChange={(e)=> setQuery(e.target.value)}>
+          </input>
+        </div>
         <ul className="list-unstyled">
-          {this.props.badges.map(badge => {
+          {filteredBadges.map(badge => {
             return (
               <li key={badge.id}>
-                <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}/edit`}>
+                <Link className="text-reset text-decoration-none" to={`/badges/${badge.id}`}>
                   <BadgesListItem badge={badge} />
                 </Link>
               </li>
@@ -43,7 +67,6 @@ class BadgesList extends React.Component {
         </ul>
       </div>
     );
-  }
 }
 
 export default BadgesList;

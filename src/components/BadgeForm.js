@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class BadgeForm extends React.Component {
 
 
@@ -69,7 +70,7 @@ class BadgeForm extends React.Component {
             />
           </div>
 
-          <button  className="btn btn-primary">
+          <button  className="btn btn-primary ">
             Save
           </button>
           {this.props.error && <p className="text-danger">{this.props.error.message}</p>}

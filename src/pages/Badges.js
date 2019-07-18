@@ -14,8 +14,14 @@ class Badges extends React.Component {
       data: undefined,
     };
   componentDidMount(){
-    this.fetchData()
+    this.fetchData();
+    this.intervalID = setInterval(this.fetchData, 5000);
   }
+
+  componentWillUnmount(){
+    clearInterval(this.intervalID);
+  }
+
   fetchData = async () => {
     this.setState({
       loading: true,
@@ -30,7 +36,7 @@ class Badges extends React.Component {
   }
 
   render() {
-    if (this.state.loading === true){
+    if (this.state.loading === true && !this.state.data){
       return <PageLoading/>;
     }
     if (this.state.error){
