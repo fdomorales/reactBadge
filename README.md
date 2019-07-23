@@ -1,2 +1,2 @@
 # reactBadge
-Repositorio de prueba
+Repositorio React
