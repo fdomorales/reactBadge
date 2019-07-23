@@ -1,2 +1,0 @@
-# reactBadge
-Repositorio de prueba
